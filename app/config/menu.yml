@@ -1,0 +1,18 @@
+# This file defines the menus on the website. See the documentation for
+# details: https://docs.bolt.cm/configuration/menus
+
+main:
+    - label: Anime 2018
+      title: The 20th AnimeCon Festival
+      path: homepage
+      class: first
+    - label: Cosplay
+      title: What is cosplay
+      path: pages/cosplay
+    - label: History
+      title: Our history
+      path: pages/history
+    - label: About us
+      path: pages/about-us
+    - label: Contact information
+      path: pages/contact

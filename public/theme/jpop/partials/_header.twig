@@ -1,0 +1,6 @@
+<!-- Header bar -->
+<header>
+    <a href="{{ path('homepage') }}"><img src="{{ asset('images/cropped-j-pop_logo.jpg', 'theme') }}" alt="{{ config.get('general/sitename') }}" /></a>
+    {{ menu(template = 'partials/_sub_menu.twig') }}
+    <hr>
+</header>
