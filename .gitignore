@@ -1,7 +1,7 @@
 # PHP files and folders
 /composer.lock
 /.bolt.yml
-/app/config/config_local.yml
+/app/config/*_local.yml
 /extensions
 /nbproject
 /public/files
@@ -10,3 +10,5 @@
 /var
 /vendor
 /public/thumbs
+/app/nut
+/public/info.php

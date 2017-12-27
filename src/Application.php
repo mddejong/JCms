@@ -13,6 +13,7 @@ namespace JCms;
 
 use Bolt\Application as BoltApplication;
 use Bolt\Configuration\Composer;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  *
@@ -29,18 +30,25 @@ class Application extends BoltApplication
      */
     public function __construct($installationDir)
     {
-        $configuration = new Composer($installationDir);
-        $configuration->setPath("cache", $installationDir . '/var/cache');
-        $configuration->setPath('view', '%web%/bolt-public');
-//        $configuration->setPath("web", $installationDir . '/public');
-//        // $configuration->setPath("files", "public/files");
-//        // $configuration->setPath("themebase", "public/theme");
-        $configuration->setUrl("root", "/JCms");
-        $configuration->setUrl('view', '/JCms/bolt-public');
-//        $configuration->getVerifier()->disableApacheChecks();
-        $configuration->verify();
+        parent::__construct([
+            'path_resolver.root' => $installationDir,
+            'path_resolver.paths' => [
+                'cache' => $installationDir . '/var/cache',
+                'view', '%web%/bolt-public',
+                ]]);
 
-        parent::__construct(['resources' => $configuration]);
+        $this->subscribe($this['dispatcher']);
+        // $configuration->setUrl("root", "/JCms");
+        // $configuration->setUrl('view', '/JCms/bolt-public');
     }
 
+    /**
+     * Define events to listen to here.
+     *
+     * @param EventDispatcherInterface $dispatcher
+     */
+    protected function subscribe(EventDispatcherInterface $dispatcher)
+    {
+        $dispatcher->addSubscriber(new EventEchoListener($this));
+    }
 }
